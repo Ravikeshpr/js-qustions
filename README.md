@@ -134,26 +134,45 @@ TIMER Stop
 
 
 import { useState, useEffect, useRef } from "react";
+
 import Counter from "./Counter";
+
 import "./styles.css";
-let interval;
+
+
 export default function App() {
+
   const [timer, setTimer] = useState(0);
+  
   const [state, setState] = useState(0);
+  
   const increment = useRef(null);
+  
   const decrement = useRef(null);
+  
   const handleStart = () => {
+  
     console.log("timer and state", timer, state);
+    
     if (state > timer) {
+    
       increment.current = setInterval(function () {
+      
         setTimer((timer) => timer + 1);
+        
       }, 1000);
+      
     }
     if (timer > state) {
+    
       decrement.current = setInterval(function () {
+      
         setTimer((timer) => timer - 1);
+        
       }, 1000);
+      
     }
+    
   };
 
   useEffect(() => {
