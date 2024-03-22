@@ -130,4 +130,55 @@ Previously created memory space is now available for garbage collection.
 =============================================================================================================================================
 
 
+TIMER Stop
+
+
+import { useState, useEffect, useRef } from "react";
+import Counter from "./Counter";
+import "./styles.css";
+let interval;
+export default function App() {
+  const [timer, setTimer] = useState(0);
+  const [state, setState] = useState(0);
+  const increment = useRef(null);
+  const decrement = useRef(null);
+  const handleStart = () => {
+    console.log("timer and state", timer, state);
+    if (state > timer) {
+      increment.current = setInterval(function () {
+        setTimer((timer) => timer + 1);
+      }, 1000);
+    }
+    if (timer > state) {
+      decrement.current = setInterval(function () {
+        setTimer((timer) => timer - 1);
+      }, 1000);
+    }
+  };
+
+  useEffect(() => {
+    console.log("fff", state, timer);
+
+    if (state == timer || timer <= 0 || timer >= 10) {
+      clearInterval(increment.current);
+      clearInterval(decrement.current);
+    }
+  }, [state, timer]);
+
+  const handleReset = () => {
+    clearInterval(increment.current);
+    setTimer(0);
+  };
+
+  return (
+    <div className="App">
+      <p>Timer: {timer}</p>
+      <input value={state} onChange={(e) => setState(e.target.value)} />
+      <button onClick={handleStart}>Start</button>
+      <button onClick={handleReset}>Reset</button>
+    </div>
+  );
+}
+
+
 
