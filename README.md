@@ -201,3 +201,20 @@ export default function App() {
 
 
 
+==================================================================== Triangle of numbers =================================================================================
+
+
+
+function printTriangle(depth) {
+  let num = (depth * (depth + 1)) / 2;
+  let str = "";
+  for (let n = depth; n >= 1; n--) {
+    for (let j = 1; j <= n; j++) {
+      str = str + num-- + " ";
+    }
+    str = str + "\n";
+  }
+  return str;
+}
+
+console.log(printTriangle(8));
